@@ -25,7 +25,7 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 
 ### Try Telephonilo.js
 
-* Open [examples/example.html](./examples/example.html) in any web browser.
+* Open [examples/example.html](https://fcmam5.github.io/telefonilo.js/examples/example.html) in any web browser.
 * If you're not on mobile, you should see the phone number as a normal test.
 * Press `Ctrl +Shift+M`, you should switch to the mobile view, you should see that the phone number became a clickable.
 
