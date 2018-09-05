@@ -9,7 +9,7 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 ## Usage
 
 1. Inlude the `telefonilo.js` script in you HTML.
-2. Instantiate Telefonilo by calling `Telefonilo();`, you can pass a selector of the tags containing phone numbers (ex: `Telefonilo(#my-phone-number)` or `Telefonilo(.phone-numbers)`) By default Telefonilo lookup for `.phone-num` classes.
+2. Instantiate Telefonilo by calling `Telefonilo();`, you can pass a selector of the tags containing phone numbers (ex: `Telefonilo('#my-phone-number')` or `Telefonilo('.phone-numbers')`) By default Telefonilo lookup for `.phone-num` classes.
 
 ### Example
 
@@ -23,6 +23,12 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 <script>Telefonilo('.phone'); </script>
 ```
 
+### Try Telephonilo.js
+
+* Open [examples/example.html](./examples/example.html) in any web browser.
+* If you're not on mobile, you should see the phone number as a normal test.
+* Press `Ctrl +Shift+M`, you should switch to the mobile view, you should see that the phone number became a clickable.
+
 #### Output
 * Desktop users will see the output as you markup should render
 >  <p>If you're on a mobile phone you should click on <span class="phone">0123456789</span></p>
@@ -33,6 +39,13 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
  ```html
   <p>If you're on a mobile phone you should click on <span class="phone"><a href="tel://0123456789">0123456789</a></span></p> 
   ```
+
+## TODO
+
+- [ ] Write tests
+- [ ] Setup a test API: Export private functions in developement mode, and strip that piece of code when building the minified function for  production usage
+- [ ] Accept phone number decryption functions as parameter for decrypting phone numbers (Might be a anti-crawlers solution).
+- [ ] Add a method of auto phone numbers detection feature.
 
 ## License
 
