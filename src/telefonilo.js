@@ -41,9 +41,6 @@
   Telefonilo.init = function (querySelector, isEncrypted, encrypTionFunction) {
     var self = this;
     self.querySelector = querySelector || '.phone-num';
-
-    if (isEncrypted)
-
       if (isMobile()) {
         var phoneNumberTags = document.querySelectorAll(self.querySelector);
         for (let i = 0; i < phoneNumberTags.length; i++) {
