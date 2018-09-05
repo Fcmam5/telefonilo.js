@@ -19,7 +19,7 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
         If you're on a mobile phone you should click on<span class="phone">0123456789</span>
     </p>
 </div>
-<script src="../src/telefonilo.js"></script>
+<script src="../dist/telefonilo.js"></script>
 <script>Telefonilo('.phone'); </script>
 ```
 
@@ -39,6 +39,33 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
  ```html
   <p>If you're on a mobile phone you should click on <span class="phone"><a href="tel://0123456789">0123456789</a></span></p> 
   ```
+
+## Building and testing
+
+### Tests
+
+```bash
+# Running unit tests with Jest
+$ npm test
+
+# Getting the test coverage, it creates a [./coverage] directory
+$ npm run coverage
+```
+
+### Build
+
+The file [./src/telefonilo.js](./src/telefonilo.js) is not production-ready, it exports the private functions in order to test them. To use Telefonilo, you can find two files (minified and unminified verion) in [dist/](./dist/). 
+
+```bash
+# Build with Gulp, it generates two files
+$ npm run build
+```
+
+The generated `dist/telefonilo.js` is a copy of `src/telefonilo.js` without that peice of code that exports the private functions. To verify run:
+
+```bash
+$ diff src/telefonilo.js dist/telefonilo.js
+```
 
 ## TODO
 

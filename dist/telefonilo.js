@@ -64,11 +64,5 @@
     global.Telefonilo = Telefonilo;
   }
 
-  /* start-test-block */
-  Telefonilo._api = {
-    isValidEncryptionFunction: isValidEncryptionFunction,
-    isMobile: isMobile,
-  }
-  /* end-test-block */
 
 })(this);
