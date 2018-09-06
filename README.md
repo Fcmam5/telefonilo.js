@@ -27,7 +27,7 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 
 * Open [examples/example.html](https://fcmam5.github.io/telefonilo.js/examples/example.html) in any web browser.
 * If you're not on mobile, you should see the phone number as a normal test.
-* Press `Ctrl +Shift+M`, you should switch to the mobile view, you should see that the phone number became a clickable.
+* Press `Ctrl+Shift+M`, you should switch to the mobile view, you should see that the phone number became a clickable.
 
 #### Output
 * Desktop users will see the output as you markup should render
@@ -54,7 +54,7 @@ $ npm run coverage
 
 ### Build
 
-The file [./src/telefonilo.js](./src/telefonilo.js) is not production-ready, it exports the private functions in order to test them. To use Telefonilo, you can find two files (minified and unminified verion) in [dist/](./dist/). 
+The file [src/telefonilo.js](./src/telefonilo.js) is not production-ready, it exports the private functions in order to test them. To use Telefonilo, you can find two files (minified and unminified verion) in [dist/](./dist/). 
 
 ```bash
 # Build with Gulp, it generates two files
@@ -70,9 +70,9 @@ $ diff src/telefonilo.js dist/telefonilo.js
 ## TODO
 
 - [ ] Write tests
-- [ ] Setup a test API: Export private functions in developement mode, and strip that piece of code when building the minified function for  production usage
+- [x] Setup a test API: Export private functions in developement mode, and strip that piece of code when building the minified function for  production usage
 - [ ] Accept phone number decryption functions as parameter for decrypting phone numbers (Might be a anti-crawlers solution).
-- [ ] Add a method of auto phone numbers detection feature.
+- [ ] Add option: Detect phone numbers automatically.
 
 ## License
 
