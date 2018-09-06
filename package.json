@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "coverage": "jest --coverage",
     "build": "gulp"
   },

@@ -41,17 +41,29 @@
   Telefonilo.init = function (querySelector, isEncrypted, encrypTionFunction) {
     var self = this;
     self.querySelector = querySelector || '.phone-num';
-      if (isMobile()) {
+    self.isCrypted = isEncrypted && encrypTionFunction;
+    
+    if (self.isCrypted && !isValidEncryptionFunction(encrypTionFunction)) 
+      throw Error('This encryption function is not valid!');
+
+    if (isMobile()) {
+      var phoneNumberTags = document.querySelectorAll(self.querySelector);
+      for (var i = 0; i < phoneNumberTags.length; i++) {
+        var el = phoneNumberTags[i];
+        var aTag = document.createElement('a');
+        aTag.href = 'tel://' + (self.isCrypted ? encrypTionFunction(el.innerText) : el.innerText);
+        aTag.innerText = el.innerText;
+        el.innerHTML = '';
+        el.appendChild(aTag);
+      }
+    } else {
+      if (self.isCrypted) {
         var phoneNumberTags = document.querySelectorAll(self.querySelector);
         for (var i = 0; i < phoneNumberTags.length; i++) {
-          var el = phoneNumberTags[i]; console.log(el);
-          var aTag = document.createElement('a');
-          aTag.href = 'tel://' + el.innerText;
-          aTag.innerText = el.innerText;
-          el.innerHTML = '';
-          el.appendChild(aTag);
+          phoneNumberTags[i].innerText = encrypTionFunction(phoneNumberTags[i].innerText);
         }
       }
+    }
   };
 
   Telefonilo.init.prototype = Telefonilo.prototype;

@@ -1,43 +1,68 @@
-const Telefonilo = require('../src/telefonilo')();
+const Telefonilo = require('../src/telefonilo');
+const { JSDOM } = require('jsdom');
+let jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+let { window } = jsdom;
+
+// Devices:
+const iPad = "Mozilla/5.0 (iPad; CPU OS 4_3_5 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8L1 Safari/6533.18.5";
+const galaxy = "Mozilla/5.0 (Linux; Android 6.0.1; SM-G900V Build/MMB29M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36";
+const ffxOnUbuntuDesktop = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0";
+
+// Mock userAgent
+function useDevice(dvc) {
+    global.navigator.__defineGetter__('userAgent', function () {
+        return dvc;
+    });
+}
 
 describe('Test helper functions', () => {
     describe('isMobile()', () => {
-        it('should check if the user is on Mobile', () => {
-            expect(true).toBeFalsy();
+        it('should check if the user is on iPhone', () => {
+            useDevice(iPad);
+            expect(Telefonilo._api.isMobile()).toBe(true);
         });
-    
+
+        it('should check if the user is on Android', () => {
+            useDevice(galaxy);
+            expect(Telefonilo._api.isMobile()).toBe(true);
+        });
+
         it('should check if the user is NOT on Mobile', () => {
-            expect(true).toBeFalsy();
+            useDevice(ffxOnUbuntuDesktop);
+            expect(Telefonilo._api.isMobile()).toBe(false);
         });
     });
 
     describe('isValidEncryptionFunction(_function)', () => {
         it('should return false if it`s not a valid function', () => {
-            expect(true).toBeFalsy();
+            const isValidEncryptionFunction = Telefonilo._api.isValidEncryptionFunction;
+            const goodEncryptionFct = function (x) {
+                return x.split ? x.split().map(function (tmp) { return 'not' + tmp }).join() : 'not' + x
+            }
+            expect(isValidEncryptionFunction()).toBe(false);
+            expect(isValidEncryptionFunction('')).toBe(false);
+            expect(isValidEncryptionFunction(goodEncryptionFct)).toBe(true);
         });
 
         it('should return false if it returns the same parameters', () => {
-            expect(true).toBeFalsy();
+            const isValidEncryptionFunction = Telefonilo._api.isValidEncryptionFunction;
+            const wrongEncryptionFct = function (x) { return x; };
+            expect(isValidEncryptionFunction(wrongEncryptionFct)).toBe(false);
         });
     });
 });
 
 describe('Test Telephonilo', () => {
-    it('should be invoked without parameters', () => {
+    xit('should be invoked without parameters', () => {
         expect(true).toBeFalsy();
     });
 
     describe('Accept CSS selectors as parameter', () => {
-        it('should work with classed (`.class`) ', () => {
+        xit('should work with classed (`.class`) ', () => {
             expect(true).toBeFalsy();
         });
 
-        it('should work with IDs (`#myID`) ', () => {
-            expect(true).toBeFalsy();
-        });
-
-        // TODO: Correct me
-        it('should work with data attributes (`data-attr`) ', () => {
+        xit('should work with IDs (`#myID`) ', () => {
             expect(true).toBeFalsy();
         });
 
