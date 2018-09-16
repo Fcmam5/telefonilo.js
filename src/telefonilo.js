@@ -44,7 +44,7 @@
     self.isCrypted = isEncrypted && encrypTionFunction;
     
     if (self.isCrypted && !isValidEncryptionFunction(encrypTionFunction)) 
-      throw Error('This encryption function is not valid!');
+      throw new Error('This encryption function is not valid!');
 
     if (isMobile()) {
       var phoneNumberTags = document.querySelectorAll(self.querySelector);

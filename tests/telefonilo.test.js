@@ -10,61 +10,62 @@ const ffxOnUbuntuDesktop = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gec
 
 // Mock userAgent
 function useDevice(dvc) {
-    global.navigator.__defineGetter__('userAgent', function () {
-        return dvc;
-    });
+  global.navigator.__defineGetter__('userAgent', function () {
+    return dvc;
+  });
 }
 
+const getGlobal = () => global;
+
 describe('Test helper functions', () => {
-    describe('isMobile()', () => {
-        it('should check if the user is on iPhone', () => {
-            useDevice(iPad);
-            expect(Telefonilo._api.isMobile()).toBe(true);
-        });
-
-        it('should check if the user is on Android', () => {
-            useDevice(galaxy);
-            expect(Telefonilo._api.isMobile()).toBe(true);
-        });
-
-        it('should check if the user is NOT on Mobile', () => {
-            useDevice(ffxOnUbuntuDesktop);
-            expect(Telefonilo._api.isMobile()).toBe(false);
-        });
+  describe('isMobile()', () => {
+    it('should check if the user is on iPhone', () => {
+      useDevice(iPad);
+      expect(Telefonilo._api.isMobile()).toBe(true);
     });
 
-    describe('isValidEncryptionFunction(_function)', () => {
-        it('should return false if it`s not a valid function', () => {
-            const isValidEncryptionFunction = Telefonilo._api.isValidEncryptionFunction;
-            const goodEncryptionFct = function (x) {
-                return x.split ? x.split().map(function (tmp) { return 'not' + tmp }).join() : 'not' + x
-            }
-            expect(isValidEncryptionFunction()).toBe(false);
-            expect(isValidEncryptionFunction('')).toBe(false);
-            expect(isValidEncryptionFunction(goodEncryptionFct)).toBe(true);
-        });
-
-        it('should return false if it returns the same parameters', () => {
-            const isValidEncryptionFunction = Telefonilo._api.isValidEncryptionFunction;
-            const wrongEncryptionFct = function (x) { return x; };
-            expect(isValidEncryptionFunction(wrongEncryptionFct)).toBe(false);
-        });
+    it('should check if the user is on Android', () => {
+      useDevice(galaxy);
+      expect(Telefonilo._api.isMobile()).toBe(true);
     });
+
+    it('should check if the user is NOT on Mobile', () => {
+      useDevice(ffxOnUbuntuDesktop);
+      expect(Telefonilo._api.isMobile()).toBe(false);
+    });
+  });
+
+  describe('isValidEncryptionFunction(_function)', () => {
+    it('should return false if it`s not a valid function', () => {
+      const isValidEncryptionFunction = Telefonilo._api.isValidEncryptionFunction;
+      const goodEncryptionFct = function (x) {
+        return x.split ? x.split().map(function (tmp) { return 'not' + tmp }).join() : 'not' + x
+      }
+      expect(isValidEncryptionFunction()).toBe(false);
+      expect(isValidEncryptionFunction('')).toBe(false);
+      expect(isValidEncryptionFunction(goodEncryptionFct)).toBe(true);
+    });
+
+    it('should return false if it returns the same parameters', () => {
+      const isValidEncryptionFunction = Telefonilo._api.isValidEncryptionFunction;
+      const wrongEncryptionFct = function (x) { return x; };
+      expect(isValidEncryptionFunction(wrongEncryptionFct)).toBe(false);
+    });
+  });
 });
 
-describe('Test Telephonilo', () => {
-    xit('should be invoked without parameters', () => {
-        expect(true).toBeFalsy();
-    });
+describe('Test Telefonilo', () => {
+  it('should be invoked without parameters', () => {
+    const telefonilo = Telefonilo();
+    expect(telefonilo).toBeDefined();
+  });
 
-    describe('Accept CSS selectors as parameter', () => {
-        xit('should work with classed (`.class`) ', () => {
-            expect(true).toBeFalsy();
-        });
+  it('should throw an error if the encryption function is invalid', () => {
+    const wrongEncryptionFct = function (x) { return x; };
+    expect(() => { Telefonilo('.phone', true, wrongEncryptionFct) }).toThrowError();
+  });
 
-        xit('should work with IDs (`#myID`) ', () => {
-            expect(true).toBeFalsy();
-        });
-
-    });
-})
+  xit('should attach Telefonilo to the global scope', () => {
+    expect(true).toBeFalsy();
+  });
+});
