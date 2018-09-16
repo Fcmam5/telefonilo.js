@@ -1,4 +1,9 @@
-# telefonilo.js
+# telefonilo.js 
+
+[![Build Status](https://travis-ci.org/Fcmam5/telefonilo.js.svg?branch=master)](https://travis-ci.org/Fcmam5/telefonilo.js) [![GitHub license](https://img.shields.io/github/license/Fcmam5/telefonilo.js.svg)](https://github.com/Fcmam5/telefonilo.js/blob/master/LICENSE)
+[![npm version](https://badge.fury.io/js/telefonilo.js.png)](https://www.npmjs.com/package/telefonilo.js)
+[![Open Source Helpers](https://www.codetriage.com/fcmam5/telefonilo.js/badges/users.svg)](https://www.codetriage.com/fcmam5/telefonilo.js)
+
 
 Tiny JavaScript library, for making **Phone call links**, for modern mobile web browsers, this library is not needed, phone numbers are automatically detected, but on older ones, it's not, and if you manage to add a `<a href='tel:XXX'>` it may be clickable by non-mobile users and the link will lead to a wrong web page.
 
@@ -52,7 +57,7 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 
 ```bash
 # Running unit tests with Jest
-$ npm test
+$ npm test # Or: npm run watch-tests
 
 # Getting the test coverage, it creates a [./coverage] directory
 $ npm run coverage
