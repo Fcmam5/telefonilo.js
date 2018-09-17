@@ -1,6 +1,6 @@
 # telefonilo.js 
 
-[![Build Status](https://travis-ci.org/Fcmam5/telefonilo.js.svg?branch=master)](https://travis-ci.org/Fcmam5/telefonilo.js) [![GitHub license](https://img.shields.io/github/license/Fcmam5/telefonilo.js.svg)](https://github.com/Fcmam5/telefonilo.js/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/Fcmam5/telefonilo.js.svg?branch=develop)](https://travis-ci.org/Fcmam5/telefonilo.js) [![GitHub license](https://img.shields.io/github/license/Fcmam5/telefonilo.js.svg)](https://github.com/Fcmam5/telefonilo.js/blob/master/LICENSE)
 [![npm version](https://badge.fury.io/js/telefonilo.js.png)](https://www.npmjs.com/package/telefonilo.js)
 [![Open Source Helpers](https://www.codetriage.com/fcmam5/telefonilo.js/badges/users.svg)](https://www.codetriage.com/fcmam5/telefonilo.js)
 
@@ -20,7 +20,7 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 ## Usage
 
 1. Inlude the `telefonilo.js` script in you HTML.
-2. Instantiate Telefonilo by calling `Telefonilo();`, you can pass a selector of the tags containing phone numbers (ex: `Telefonilo('#my-phone-number')` or `Telefonilo('.phone-numbers')`) By default Telefonilo lookup for `.phone-num` classes.
+2. Instantiate Telefonilo by calling `Telefonilo();`. you can pass a selector of the tags containing phone numbers (ex: `Telefonilo('#my-phone-number')` or `Telefonilo('.phone-numbers')`) By default Telefonilo lookup for `.phone-num` classes.
 
 ### Example
 
@@ -32,6 +32,42 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 </div>
 <script src="../dist/telefonilo.js"></script>
 <script>Telefonilo('.phone'); </script>
+```
+### Using an encryption method
+
+To avoid spam and crawlers, you may want to encrypt phone numbers on your web pages. For example, you're using `encryptionFct` to encrypt phone numbers when rendering your page:
+
+```javascript
+function encryptionFct(str){
+    return str.split('').map(n => (n.charCodeAt(0)+5)).join('-')
+}
+// encryptionFct('0123456789') Will return "53-54-55-56-57-58-59-60-61-62"
+```
+
+```html
+    <p>
+        If you're on a mobile phone you should click on
+        <span class="phone">53-54-55-56-57-58-59-60-61-62</span>
+    </p>
+```
+
+Then you can load `Telefonilo` and pass you decryption function, for example
+
+```html
+    <p>
+        If you're on a mobile phone you should click on
+        <span class="phone">53-54-55-56-57-58-59-60-61-62</span>
+    </p>
+
+    <script src="../dist/telefonilo.js"></script>
+    <script>
+        var decrypTionFct = function(str) {
+            return str.split('-').map(n => String.fromCharCode(n-5)).join('');
+        }
+
+        // Initialize Telefonilo inside a captcha-check callback, or after a certain time/event to avoid crawlers
+        Telefonilo('.phone', true, decrypTionFct);
+    </script>
 ```
 
 ### Try Telephonilo.js
