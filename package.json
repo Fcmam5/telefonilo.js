@@ -1,6 +1,6 @@
 {
   "name": "telefonilo.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Make click2call links for mobile users",
   "main": "src/telefonilo.js",
   "directories": {
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/Fcmam5/telefonilo.js.git"
   },
   "author": "Fortas Abdeldjalil (Fcmam5)",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/Fcmam5/telefonilo.js/issues"
   },
