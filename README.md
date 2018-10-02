@@ -15,7 +15,6 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 
 * Replaces a selector containing the phone number with a clickable `<a href=tel://###>` if the visitor is on mobile device.
 * Accepts a decryption functions, you can write a crypted phone numbers in your markup to avoid crawlers, then pass your decryption function to Telefonilo contructor so it decrypt the phone number. `Have an issue? A better trick? Open an issue, we'd like to hear from you!`
-* Have an option of **Automatically detects phone numbers on the pages** (might be needed for older versions of mobile browsers, the modern browsers already have this feauture). [On progress](#todo)
 
 ## Usage
 
@@ -119,7 +118,7 @@ $ diff src/telefonilo.js dist/telefonilo.js
 - [ ] Write tests. `Doing...`
 - [x] Setup a test API: Export private functions in developement mode, and strip that piece of code when building the minified function for  production usage
 - [x] Accept phone number decryption functions as parameter for decrypting phone numbers (Might be a anti-crawlers solution).
-- [ ] Add option: Detect phone numbers automatically `Doing...`.
+
 
 ## License
 
