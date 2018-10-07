@@ -18,7 +18,15 @@ The name is from `telefonillo` means `Call him` (in Algerian dialect), and I fou
 
 ## Usage
 
-1. Inlude the `telefonilo.js` script in you HTML.
+1. Inlude the `telefonilo.js` script in your HTML.
+    * `<script src="dist/telefonilo.min.js"></script>`
+    * Or, using a CDN
+        ```html 
+        <script src="https://cdn.jsdelivr.net/npm/telefonilo.js@1.0.1/dist/telefonilo.min.js" integrity="sha256-dHltx45U5E48U7ebYh/IR8UoQIKU5nzzYJluNLk+jLA=" crossorigin="anonymous"></script>
+        ```
+    * Or if you prefere NPM: `npm i telefonilo.js`
+    
+
 2. Instantiate Telefonilo by calling `Telefonilo();`. you can pass a selector of the tags containing phone numbers (ex: `Telefonilo('#my-phone-number')` or `Telefonilo('.phone-numbers')`) By default Telefonilo lookup for `.phone-num` classes.
 
 ### Example
