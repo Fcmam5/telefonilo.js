@@ -68,4 +68,13 @@ describe('Test Telefonilo', () => {
   xit('should attach Telefonilo to the global scope', () => {
     expect(true).toBeFalsy();
   });
+
+  it('should work for non-mobile devices', () => {
+    useDevice(ffxOnUbuntuDesktop);
+    const goodEncryptionFct = function (x) {
+      return x.split ? x.split().map(function (tmp) { return 'not' + tmp }).join() : 'not' + x
+    }
+    const telefonilo = Telefonilo('.phone-num', true, goodEncryptionFct);
+    expect(telefonilo).toBeDefined();
+  });
 });
