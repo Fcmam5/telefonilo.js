@@ -42,6 +42,7 @@
     var self = this;
     self.querySelector = querySelector || '.phone-num';
     self.isCrypted = isEncrypted && encrypTionFunction;
+    var supportsTextContent = typeof document.createElement("span").innerText !== "function";
     
     if (self.isCrypted && !isValidEncryptionFunction(encrypTionFunction)) 
       throw new Error('This encryption function is not valid!');
@@ -51,8 +52,13 @@
       for (var i = 0; i < phoneNumberTags.length; i++) {
         var el = phoneNumberTags[i];
         var aTag = document.createElement('a');
-        aTag.href = 'tel://' + (self.isCrypted ? encrypTionFunction(el.innerText) : el.innerText);
-        aTag.innerText = el.innerText;
+        var elText = supportsTextContent ? el.textContent : el.innerText;
+        aTag.href = 'tel://' + (self.isCrypted ? encrypTionFunction(elText) : elText);
+        if (supportsTextContent) {
+          aTag.textContent = elText;
+        } else {
+          atag.innerText = elText;
+        }
         el.innerHTML = '';
         el.appendChild(aTag);
       }
@@ -60,7 +66,11 @@
       if (self.isCrypted) {
         var phoneNumberTags = document.querySelectorAll(self.querySelector);
         for (var i = 0; i < phoneNumberTags.length; i++) {
-          phoneNumberTags[i].innerText = encrypTionFunction(phoneNumberTags[i].innerText);
+          if (supportsTextContent) {
+            phoneNumberTags[i].textContent = encrypTionFunction(phoneNumberTags[i].textContent);
+          } else {
+            phoneNumberTags[i].innerText = encrypTionFunction(phoneNumberTags[i].innerText);
+          }
         }
       }
     }
