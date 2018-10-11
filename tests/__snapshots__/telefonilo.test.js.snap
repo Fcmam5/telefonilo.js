@@ -10,7 +10,11 @@ exports[`Test Telefonilo should match the snapshot for the test html 1`] = `
       <span
         class="phone-num"
       >
-        0123456789
+        <a
+          href="tel://not0123456789"
+        >
+          0123456789
+        </a>
       </span>
     </p>
   </div>
@@ -27,7 +31,7 @@ exports[`Test Telefonilo should work for non-mobile devices 1`] = `
       <span
         class="phone-num"
       >
-        0123456789
+        not0123456789
       </span>
     </p>
   </div>
