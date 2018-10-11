@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Telefonilo should match the snapshot for the test html 1`] = `
+<body>
+  <div
+    class="container"
+  >
+    <p>
+      If you're on a mobile phone you should click on
+      <span
+        class="phone-num"
+      >
+        0123456789
+      </span>
+    </p>
+  </div>
+</body>
+`;
+
+exports[`Test Telefonilo should work for non-mobile devices 1`] = `
+<body>
+  <div
+    class="container"
+  >
+    <p>
+      If you're on a mobile phone you should click on
+      <span
+        class="phone-num"
+      >
+        0123456789
+      </span>
+    </p>
+  </div>
+</body>
+`;

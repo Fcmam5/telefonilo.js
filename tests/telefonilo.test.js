@@ -8,11 +8,18 @@ const iPad = "Mozilla/5.0 (iPad; CPU OS 4_3_5 like Mac OS X; en-us) AppleWebKit/
 const galaxy = "Mozilla/5.0 (Linux; Android 6.0.1; SM-G900V Build/MMB29M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36";
 const ffxOnUbuntuDesktop = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0";
 
+const testHTML = `<!doctype html><html><body><div class="container"><p>If you're on a mobile phone you should click on<span class="phone-num">0123456789</span></p></div></body></html>`;
+
 // Mock userAgent
 function useDevice(dvc) {
   global.navigator.__defineGetter__('userAgent', function () {
     return dvc;
   });
+}
+
+// Passing encryption function that can be reused for tests.
+const goodEncryptionFct = function (x) {
+  return x.split ? x.split().map(function (tmp) { return 'not' + tmp }).join() : 'not' + x
 }
 
 const getGlobal = () => global;
@@ -38,9 +45,7 @@ describe('Test helper functions', () => {
   describe('isValidEncryptionFunction(_function)', () => {
     it('should return false if it`s not a valid function', () => {
       const isValidEncryptionFunction = Telefonilo._api.isValidEncryptionFunction;
-      const goodEncryptionFct = function (x) {
-        return x.split ? x.split().map(function (tmp) { return 'not' + tmp }).join() : 'not' + x
-      }
+
       expect(isValidEncryptionFunction()).toBe(false);
       expect(isValidEncryptionFunction('')).toBe(false);
       expect(isValidEncryptionFunction(goodEncryptionFct)).toBe(true);
@@ -60,9 +65,17 @@ describe('Test Telefonilo', () => {
     expect(telefonilo).toBeDefined();
   });
 
+  it('should match the snapshot for the test html', () => {
+    document.body.innerHTML = testHTML;
+
+    useDevice(iPad);
+    Telefonilo('.phone-num', true, goodEncryptionFct);
+    expect(document.body).toMatchSnapshot();
+  })
+
   it('should throw an error if the encryption function is invalid', () => {
     const wrongEncryptionFct = function (x) { return x; };
-    expect(() => { Telefonilo('.phone', true, wrongEncryptionFct) }).toThrowError();
+    expect(() => { Telefonilo('.phone-num', true, wrongEncryptionFct) }).toThrowError();
   });
 
   xit('should attach Telefonilo to the global scope', () => {
@@ -70,11 +83,10 @@ describe('Test Telefonilo', () => {
   });
 
   it('should work for non-mobile devices', () => {
+    document.body.innerHTML = testHTML;
+
     useDevice(ffxOnUbuntuDesktop);
-    const goodEncryptionFct = function (x) {
-      return x.split ? x.split().map(function (tmp) { return 'not' + tmp }).join() : 'not' + x
-    }
-    const telefonilo = Telefonilo('.phone-num', true, goodEncryptionFct);
-    expect(telefonilo).toBeDefined();
+    Telefonilo('.phone-num', true, goodEncryptionFct);
+    expect(document.body).toMatchSnapshot();
   });
 });
